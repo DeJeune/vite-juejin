@@ -25,16 +25,13 @@
 import { useRoute } from 'vue-router';
 import { getArticleById, getCommentsByArticleId } from '../../api';
 import {
-  getCurrentInstance,
-  onMounted,
-  onUpdated,
+  nextTick,
   reactive,
   ref,
   toRefs
 } from 'vue';
 import UserInfo from '../../components/userinfo/UserInfo.vue';
 import ActionBar from '../../components/actionbar/ActionBar.vue';
-import CommentItem from '../../components/commentItem/CommentItem.vue';
 import Scroll from '../../components/scroll/Scroll.vue';
 import CommentContainer from '../../components/commentcontainer/CommentContainer.vue';
 export default {
@@ -69,7 +66,6 @@ export default {
     let page = ref(0);
 
     init();
-    onMounted(() => {});
 
     function init() {
       const postId = route.params.id;
@@ -77,6 +73,9 @@ export default {
       _getCommentsByArticleId(postId).then((res) =>
         commentsInfo.comments.push(...res)
       );
+      nextTick(() => {
+        scroll.value.refresh();
+      });
     }
     async function query() {
       const postId = route.params.id;
@@ -120,8 +119,9 @@ export default {
       scroll.value.refresh();
     }
     function click() {
-      console.log('1111');
-      scroll.value.scrollToElement('.comment-container', 500, undefined, 0);
+      nextTick(() => {
+        scroll.value.scrollToElement('.comment-container', 500, undefined, 0);
+      });
     }
     return {
       ...toRefs(info),

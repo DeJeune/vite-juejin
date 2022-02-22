@@ -3,7 +3,6 @@ import vue from '@vitejs/plugin-vue'
 import {svgBuilder} from "./src/plugins/svgBuilder.js";
 import path from 'path';
 
-const isProduction = process.env.NODE_ENV === 'production'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -11,9 +10,7 @@ export default defineConfig({
   root: process.cwd(),
   plugins: [vue(), svgBuilder('./src/icons/svg/')],
   // 在生产中服务时的基本公共路径
-  base: isProduction ? './' : '',
-  // 配置中指明将会把 serve 和 build 时的模式都覆盖掉,serve 时默认 'development'，build 时默认 'production'
-  mode: 'development',
+  base: process.env.VITE_PUBLIC_PATH,
   // 在开发时会被定义为全局变量，而在构建时则是静态替换
   define: '',
   // 静态资源服务的文件夹

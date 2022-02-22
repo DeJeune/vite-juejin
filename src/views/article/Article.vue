@@ -54,14 +54,11 @@ import Tag from '../../components/tag/Tag.vue';
 import {
   computed,
   nextTick,
-  onMounted,
-  onUnmounted,
-  onUpdated,
   reactive,
   ref,
   toRefs
 } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
 import { getArticles, getCategories } from '../../api';
 import { useStore } from 'vuex';
 import Scroll from '../../components/scroll/Scroll.vue';
@@ -132,6 +129,9 @@ export default {
         ? _tags[0].category_id
         : route.meta.categoryId;
       await query();
+      await nextTick(() => {
+        scroll.value.refresh();
+      });
     }
     async function requestData() {
       let tmp = assembleQueryData();

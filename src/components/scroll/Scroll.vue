@@ -54,6 +54,8 @@ export default {
         scrollY: true,
         scrollbar: true,
         useTransition: true,
+        disableMouse: false,
+        disableTouch: false,
         probeType: probeType.value,
         pullUpLoad: pullUpLoad.value
       });
@@ -69,7 +71,7 @@ export default {
       }
     }
     function scrollTo(x, y, time = 300) {
-      scroll.scrollTo(x, y, time);
+      scroll && scroll.scrollTo(x, y, time);
     }
     function scrollToElement(el, time = 500, x = true, y) {
       scroll && scroll.scrollToElement(el, time, x, y);

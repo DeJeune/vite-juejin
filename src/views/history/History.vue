@@ -25,8 +25,8 @@ import { useStore } from 'vuex';
 import Search from '../../components/search/Search.vue';
 import HistoryArticleItem from '../../components/article/HistoryArticleItem.vue';
 import { getArticles } from '../../api';
-import { onMounted, reactive, ref, toRefs } from "vue";
-import Scroll from "../../components/scroll/Scroll.vue";
+import { onMounted, reactive, ref, toRefs } from 'vue';
+import Scroll from '../../components/scroll/Scroll.vue';
 export default {
   name: 'History',
   components: { Scroll, HistoryArticleItem, Search },
@@ -39,7 +39,7 @@ export default {
       articleList: [],
       itemUrl
     });
-    let scroll = ref(null)
+    let scroll = ref(null);
     onMounted(async () => {
       const data = await getAllArticles();
       function classify(arr, key) {
